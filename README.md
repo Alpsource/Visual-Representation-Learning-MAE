@@ -22,9 +22,9 @@ A PyTorch implementation of **Masked Autoencoders (MAE)** (He et al., 2022) appl
 
 The core idea of MAE is to mask a large portion of the image and reconstruct the missing pixels.
 
-**Top:** Original Image  
+**Left:** Original Image  
 **Middle:** Masked Input (model input)  
-**Bottom:** Reconstruction (model output)
+**Right:** Reconstruction (model output)
 
 ![Reconstruction Demo](images/Epoch_50_ssl_L1.png)
 
@@ -68,7 +68,7 @@ The pre-trained encoder is fine-tuned on a **5k labeled subset** of STL-10 and c
 1. **Clone the repository**
 
 ```bash
-git clone https://github.com/yourusername/mae-stl10.git
+git clone https://github.com/Alpsource/Visual-Representation-Learning-MAE.git
 cd mae-stl10
 ```
 
