@@ -69,7 +69,7 @@ The pre-trained encoder is fine-tuned on a **5k labeled subset** of STL-10 and c
 
 ```bash
 git clone https://github.com/Alpsource/Visual-Representation-Learning-MAE.git
-cd mae-stl10
+cd Visual-Representation-Learning-MAE
 ```
 
 2. **Install dependencies**
