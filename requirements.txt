@@ -1,0 +1,7 @@
+lightly 
+timm
+torch
+matplotlib
+scikit-learn
+seaborn
+numpy
