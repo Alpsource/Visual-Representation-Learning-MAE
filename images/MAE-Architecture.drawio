@@ -1,0 +1,90 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36" version="29.3.6">
+  <diagram name="Sayfa-1" id="zhaDjUIK0xpX6r4_PrB2">
+    <mxGraphModel dx="1665" dy="743" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="node_input" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="Input Image&#xa;(e.g., 224x224)" vertex="1">
+          <mxGeometry height="60" width="120" x="40" y="200" as="geometry" />
+        </mxCell>
+        <mxCell id="node_patch" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" value="Patchify &amp; Random Masking&#xa;(75% Masked)" vertex="1">
+          <mxGeometry height="60" width="160" x="200" y="200" as="geometry" />
+        </mxCell>
+        <mxCell id="node_visible" parent="1" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="Visible Patches&#xa;(25%)" vertex="1">
+          <mxGeometry height="60" width="140" x="400" y="140" as="geometry" />
+        </mxCell>
+        <mxCell id="node_masked" parent="1" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;fillColor=#f8cecc;strokeColor=#b85450;dashed=1;" value="Masked Patches&#xa;(Discarded)" vertex="1">
+          <mxGeometry height="60" width="160" x="400" y="260" as="geometry" />
+        </mxCell>
+        <mxCell id="node_encoder" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;strokeWidth=2;" value="Heavyweight Encoder&#xa;(ViT)&#xa;&#xa;*Only processes&#xa;visible patches*" vertex="1">
+          <mxGeometry height="100" width="120" x="580" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="node_join" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" value="Add Mask Tokens &amp;&#xa;Unshuffle to Original Pos" vertex="1">
+          <mxGeometry height="60" width="160" x="740" y="200" as="geometry" />
+        </mxCell>
+        <mxCell id="node_decoder" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;strokeWidth=2;" value="Lightweight Decoder&#xa;(ViT)&#xa;&#xa;*Rebuilds pixels*" vertex="1">
+          <mxGeometry height="100" width="120" x="940" y="180" as="geometry" />
+        </mxCell>
+        <mxCell id="node_output" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="Reconstructed Image" vertex="1">
+          <mxGeometry height="60" width="120" x="1100" y="200" as="geometry" />
+        </mxCell>
+        <mxCell id="node_target" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;dashed=1;" value="Original Image&#xa;(Target)" vertex="1">
+          <mxGeometry height="60" width="120" x="1100" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="node_loss" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" value="L1 Loss&lt;br&gt;(Only computed on&lt;br&gt;masked patches)" vertex="1">
+          <mxGeometry height="70" width="140" x="1260" y="250" as="geometry" />
+        </mxCell>
+        <mxCell id="edge1" edge="1" parent="1" source="node_input" target="node_patch">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge2" edge="1" parent="1" source="node_patch" target="node_visible">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="380" y="170" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge3" edge="1" parent="1" source="node_patch" target="node_masked">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="380" y="290" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge4" edge="1" parent="1" source="node_visible" target="node_encoder">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge5" edge="1" parent="1" source="node_encoder" target="node_join">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="720" y="170" />
+              <mxPoint x="720" y="230" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge6" edge="1" parent="1" source="node_join" target="node_decoder">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge7" edge="1" parent="1" source="node_decoder" target="node_output">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge8" edge="1" parent="1" source="node_output" target="node_loss">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1240" y="230" />
+              <mxPoint x="1240" y="285" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge9" edge="1" parent="1" source="node_target" target="node_loss">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1240" y="350" />
+              <mxPoint x="1240" y="285" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

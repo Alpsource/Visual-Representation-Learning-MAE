@@ -6,7 +6,6 @@
 
 A PyTorch implementation of **Masked Autoencoders (MAE)** (He et al., 2022) applied to the **STL-10** dataset. This project demonstrates how self-supervised learning can leverage large-scale **unlabeled data (100k images)** to learn robust visual representations, significantly outperforming supervised training from scratch when labeled data is limited.
 
----
 
 ## 🌟 Key Features
 
@@ -16,7 +15,6 @@ A PyTorch implementation of **Masked Autoencoders (MAE)** (He et al., 2022) appl
 - **Data Efficient:** Pre-trained encoder converges **4× faster** (≈5 epochs vs 20) on downstream tasks.
 - **Latent Space Analysis:** Includes **t-SNE** visualization of learned feature manifolds.
 
----
 
 ## 🎨 Visual Reconstruction Results
 
@@ -30,7 +28,21 @@ The core idea of MAE is to mask a large portion of the image and reconstruct the
 
 *Figure 1: Reconstruction results after 50 epochs of self-supervised pre-training using L1 Loss. The model successfully hallucinates missing structures such as object bodies and geometric components.*
 
----
+
+## Architecture Overview
+
+![Architecture](images/mae_architecture.png)
+
+This project implements the core asymmetric encoder-decoder architecture of Masked Autoencoders:
+
+1. **Patchify & Mask**: The input image is divided into patches, and 75% of them are randomly masked and discarded.
+
+2. **Encoder**: A heavyweight Vision Transformer (ViT) processes only the remaining 25% visible patches.
+
+3. **Decoder**: A lightweight ViT takes the encoded visible patches, appends learnable mask tokens, unshuffles them to their original positions, and reconstructs the missing pixels.
+
+4. **Loss**: L1 Error is computed strictly on the masked patches.
+
 
 ## 📊 Experimental Results
 
